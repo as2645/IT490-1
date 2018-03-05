@@ -202,6 +202,31 @@ textarea {
   margin:0 auto;
 }
 
+table{
+    font-family: 'Titillium Web', sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+table td, table th {
+    border: 0px solid;
+    padding: 8px;
+}
+
+table tr {
+	background-color: rgba(19, 35, 47, 0.9);
+  color: #1ab188;
+  text-align: center;
+}
+
+table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: center;
+    background-color: #1ab188;
+    color: white;
+}
+
 .forgot {
   margin-top: -20px;
   text-align: right;

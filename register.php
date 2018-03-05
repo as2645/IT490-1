@@ -27,9 +27,37 @@ if ( $result->num_rows > 0 ) {
 }
 else { // Email doesn't already exist in a database, proceed...
 
+
+    //connection to database for user related tables
+    $user = new mysqli('localhost', 'root', 'Jonathan723', 'userdata');
+
+    //create user table for owned games
+    $owned = "CREATE TABLE `owned_$email`(
+      steam_app_id INT NOT NULL,
+      rating ENUM('null','like','dislike') DEFAULT 'null',
+      PRIMARY KEY (steam_app_id)
+    )";
+    $user->query($owned) or die($user->error);
+
+    //table for user preferences
+    $pref = "CREATE TABLE `pref_$email`(
+      genre_id INT NOT NULL AUTO_INCREMENT,
+      genre INT NOT NULL,
+      PRIMARY KEY (genre_id)
+    )";
+    $user->query($pref) or die($user->error);
+
+    //table for user preferences
+    $watch = "CREATE TABLE `watch_$email`(
+      steam_app_id INT NOT NULL,
+      PRIMARY KEY (steam_app_id)
+    )";
+    $user->query($watch) or die($user->error);
+
     // active is 0 by DEFAULT (no need to include it here)
     $sql = "INSERT INTO users (first_name, last_name, email, password, hash) "
             . "VALUES ('$first_name','$last_name','$email','$password', '$hash')";
+
 
     // Add user to the database
     if ( $mysqli->query($sql) ){
