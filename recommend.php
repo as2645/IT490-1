@@ -1,0 +1,13 @@
+<?php
+
+include 'user_functions.php';
+
+$id = $_POST["id"];
+$first_name  = $_POST["first_name"];
+$last_name  = $_POST["last_name"];
+$email = $_POST["email"];
+$name = $_POST["name"];
+
+recommend_game($id, $first_name, $last_name, $email, $name);
+
+ ?>

@@ -24,7 +24,7 @@ else {
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
 
-  <title><?= ucwords($first_name.' '.$last_name) ?>'s Games</title>
+  <title><?= ucwords($first_name.' '.$last_name) ?>'s Watch List</title>
   <?php include 'css/css.html'; ?>
   <link rel="stylesheet" href="css/style.css">
 </head>
@@ -32,13 +32,14 @@ else {
 <body>
   <div class="form">
 
-	<h1><?php echo ucwords($first_name.' '.$last_name). "'s Owned Games"; ?></h1>
+	<h1><?php echo ucwords($first_name.' '.$last_name). "'s Watch List"; ?></h1>
 
   <?php
 
   require 'user_functions.php';
-  
-  display_owned($email);
+
+  display_watchlist($email);
+
 
    ?>
 

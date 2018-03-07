@@ -32,13 +32,13 @@ else {
 <body>
   <div class="form">
 
-	<h1><?php echo ucwords($first_name.' '.$last_name). "'s Owned Games"; ?></h1>
+	<h1>Recommended Games</h1>
 
   <?php
 
   require 'user_functions.php';
-  
-  display_owned($email);
+
+  display_recommended();
 
    ?>
 

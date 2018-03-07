@@ -35,6 +35,7 @@ else { // Email doesn't already exist in a database, proceed...
     $owned = "CREATE TABLE `owned_$email`(
       steam_app_id INT NOT NULL,
       rating ENUM('null','like','dislike') DEFAULT 'null',
+      game_name VARCHAR(255),
       PRIMARY KEY (steam_app_id)
     )";
     $user->query($owned) or die($user->error);
@@ -50,6 +51,8 @@ else { // Email doesn't already exist in a database, proceed...
     //table for user preferences
     $watch = "CREATE TABLE `watch_$email`(
       steam_app_id INT NOT NULL,
+      game_name VARCHAR(255),
+      exp_release_date DATE,
       PRIMARY KEY (steam_app_id)
     )";
     $user->query($watch) or die($user->error);

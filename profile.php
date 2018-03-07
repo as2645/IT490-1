@@ -39,13 +39,13 @@ else {
           <?php
 
           // Display message about account verification link only once
-          if ( isset($_SESSION['message']) )
+          /*if ( isset($_SESSION['message']) )
           {
               echo $_SESSION['message'];
 
               // Don't annoy the user with more messages upon page refresh
               unset( $_SESSION['message'] );
-          }
+          }*/
 
           ?>
           </p>
@@ -53,21 +53,36 @@ else {
           <?php
 
           // Keep reminding the user this account is not active, until they activate
-          if ( !$active ){
+          /*if ( !$active ){
               echo
               '<div class="info">
               Account is unverified, please confirm your email by clicking
               on the email link!
               </div>';
-          }
+          }*/
 
           ?>
 
           <h2><?php echo $first_name.' '.$last_name; ?></h2>
           <p><?= $email ?></p>
 
-			    <a href="search.html"><button class="button button-block" name="SEARCH GAMES"/>Search Games</button></a>
-			    <br><a href="owned.php"><button class="button button-block" name="OWNED"/>Owned</button></a>
+          <div class="row">
+            <div class="col-md-6">
+                <a href="search.php"><button class="button button-block" name="SEARCH GAMES"/>Search</button></a>
+            </div>
+            <div class="col-md-6">
+                <a href="owned.php"><button class="button button-block" name="OWNED"/>Owned</button></a>
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-md-6">
+                <a href="watchlist.php"><button class="button button-block" name="WATCH LIST"/>Watch List</button></a>
+            </div>
+            <div class="col-md-6">
+                <a href="recommended.php"><button class="button button-block" name="RECOMMENDED"/>Recommended</button></a>
+            </div>
+          </div>
           <br><a href="logout.php"><button class="button button-block" name="logout"/>Log Out</button></a>
 
     </div>
