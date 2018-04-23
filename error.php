@@ -16,7 +16,7 @@ session_start();
     if( isset($_SESSION['message']) AND !empty($_SESSION['message']) ):
         echo $_SESSION['message'];
         $date = date_create();
-        file_put_contents('error.log', "[".date_format($date, 'm-d-Y H:i:s')."] ".$_SESSION['message'].PHP_EOL, FILE_APPEND);
+        file_put_contents('error.log', "[".date_format($date, 'm-d-Y H:i:s')."] ".__FILE__.__LINE__.$_SESSION['message'].PHP_EOL, FILE_APPEND);
     else:
         header( "location: index.php" );
     endif;

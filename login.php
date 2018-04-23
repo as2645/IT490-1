@@ -1,30 +1,25 @@
 <?php
-/* User login process, checks if user exists and password is correct */
-// Escape email to protect against SQL injections
-$email = $mysqli->escape_string($_POST['email']);
-$result = $mysqli->query("SELECT * FROM users WHERE email='$email'");
 
-if ( $result->num_rows == 0 ){ // User doesn't exist
-    $_SESSION['message'] = "User with email: ".$email." doesn't exist!";
-    header("location: error.php");
+require ('authClient.php');
+$email = $_POST['email'];
+$userpass = $_POST['password'];
+
+$response = authentication($email, $userpass);
+
+if($response == false){
+      echo "Login Failed";
+      $_SESSION['message'] = "Invalid email or password, try again!";
+      header("location: error.php");
 }
-else { // User exists
-    $user = $result->fetch_assoc();
-
-    if ( password_verify($_POST['password'], $user['password']) ) {
-
-        $_SESSION['email'] = $user['email'];
-        $_SESSION['first_name'] = $user['first_name'];
-        $_SESSION['last_name'] = $user['last_name'];
-        $_SESSION['active'] = $user['active'];
-
-        // This is how we'll know the user is logged in
-        $_SESSION['logged_in'] = true;
-
-        header("location: profile.php");
-    }
-    else {
-        $_SESSION['message'] = "You have entered wrong password, try again!";
-        header("location: error.php");
-    }
+else{
+      echo "Login Successful";
+      $userinfo = json_decode($response, true);
+      $_SESSION['logged_in'] = true;
+      $_SESSION['email'] = $userinfo['email'];
+      $_SESSION['first_name'] = $userinfo['first_name'];
+      $_SESSION['last_name'] = $userinfo['last_name'];
+      $_SESSION['active'] = $userinfo['active'];
+      $date = date_create();
+      file_put_contents('user.log', "[".date_format($date, 'm-d-Y H:i:s')."] "."Account with email: ".$email." logged in.".PHP_EOL, FILE_APPEND);
+      header("location: profile.php");
 }
